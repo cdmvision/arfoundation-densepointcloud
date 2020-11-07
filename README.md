@@ -6,3 +6,6 @@ Visualizing a point cloud using depth API in Unity similar to [WWDC20 demo](http
 
 ### Requirements
 - iOS device with a LiDAR sensor (iPad Pro 2020 and iPhone 12)
+
+### Known Issues
+- Supports only *Landscape Left* orientation
