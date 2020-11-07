@@ -57,16 +57,24 @@ namespace Cdm.XR.Extensions
 
         private void Start()
         {
-            pointCloud = Instantiate(pointCloudPrefab);
-            pointCloud.Create(maxPoints);
-            _pointClouds.Add(pointCloud);
-            OnPointCloudAdded();
+            CreateNewPointCloud();
 
             _mainCamera = Camera.main;
 
 #if !UNITY_EDITOR
             StartCoroutine(InitializeSubsystems());
 #endif
+        }
+
+        private void CreateNewPointCloud()
+        {
+            pointCloud = Instantiate(pointCloudPrefab);
+            pointCloud.name = $"Point Cloud ({_pointClouds.Count})";
+            pointCloud.Create(maxPoints);
+            _pointClouds.Add(pointCloud);
+            OnPointCloudAdded();
+            
+            //Debug.Log($"New point cloud created: {pointCloud.name}");
         }
         
         public void DestroyAllPointClouds()
@@ -151,18 +159,20 @@ namespace Cdm.XR.Extensions
                     var worldPoint =
                         _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width * npx, Screen.height * npy, depth));
 
-                    if (!pointCloud.isFull)
+                    if (pointCloud.isFull)
                     {
-                        if (depthConfidence >= minConfidence)
-                        {
-                            var normal = (_mainCamera.transform.position - worldPoint).normalized;
-                            pointCloud.Add(worldPoint, normal, color, depthConfidence);
-                        }
-                            
+                        // Complete current point cloud update operation.
+                        pointCloud.EndUpdate();
+                        
+                        // Create new point cloud and continue to adding points.
+                        CreateNewPointCloud();
+                        pointCloud.BeginUpdate();
                     }
-                    else
+
+                    if (depthConfidence >= minConfidence)
                     {
-                        Debug.LogWarning("Max point cloud size has been reached.");
+                        var normal = (_mainCamera.transform.position - worldPoint).normalized;
+                        pointCloud.Add(worldPoint, normal, color, depthConfidence);
                     }
                 }
 
