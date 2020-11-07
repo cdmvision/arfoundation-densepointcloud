@@ -1,0 +1,68 @@
+[Tt]emp/
+[Oo]bj/
+[Bb]in/
+[Bb]uilds/
+/[Bb]uild/
+[Ll]ibrary/
+[Aa]pp/
+[Bb]lender/
+/UWP/
+WindowsStoreApp/
+UnityGenerated/
+UnityPackageManager/
+project.json
+project.lock.json
+WSATestCertificate.pfx
+WSATestCertificate.pfx.meta
+
+.idea/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+.vs/
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+/*.csproj
+/*.csproj.meta
+*.csproj
+*.csproj.meta
+*.pidb
+*.suo
+/*.sln
+*.sln
+*.user
+*.unityproj
+*.ipch
+*.opensdf
+*.sdf
+*.tlog
+*.log
+*.idb
+*.opendb
+
+# Unity3D generated meta files
+*.pidb.meta
+
+# Unity3D Generated File On Crash Reports
+sysinfo.txt
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+*.apk
+
+# Blender temp files
+*.blend1
+*.blend1.meta
+*.DS_Store
